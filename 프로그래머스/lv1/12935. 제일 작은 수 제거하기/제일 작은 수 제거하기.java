@@ -1,25 +1,23 @@
+import java.util.Arrays;
 class Solution {
     public int[] solution(int[] arr) {
-        int[] test = {-1};
+        int[] ans = new int[arr.length];
         if(arr.length == 1){
-            return test;
+            ans[0] = -1;
+            return ans;
         }
-        
-        int min = 0;
-        for(int i =1;i<arr.length;i++){
-            if(arr[i]<arr[min]){
-                min = i;
+        else{
+            int[] copy = arr;
+            Arrays.sort(copy);
+            int min = copy[0];
+            int count = 0;
+            for(int i : arr){
+                if(i!=min){
+                    ans[count] = i;
+                    count++;
+                }
             }
+            return ans;
         }
-        // 최소값 = arr[min]
-        
-        int[] answer = new int[arr.length-1];
-        for(int i =0,j=0;i<arr.length;i++){
-            if(i!=min)
-                answer[j++] = arr[i];
-        }
-
-        // int[] answer = {};
-        return answer;
     }
 }
