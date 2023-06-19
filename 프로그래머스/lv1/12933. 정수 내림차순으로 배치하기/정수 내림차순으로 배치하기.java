@@ -3,9 +3,9 @@ import java.util.Arrays;
 class Solution {
     public long solution(long n) {
         String str_n = Long.toString(n);       
-        long[] long_arr = new long[str_n.length()];
+        int[] long_arr = new int[str_n.length()];
         for(int i =0;i<str_n.length();i++){
-            long_arr[i] = str_n.charAt(i) - '0';
+            long_arr[i] = Character.getNumericValue(str_n.charAt(i));
         }
 
         Arrays.sort(long_arr);    
