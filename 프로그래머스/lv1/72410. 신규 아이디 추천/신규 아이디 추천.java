@@ -1,36 +1,43 @@
 class Solution {
     public String solution(String new_id) {
-        // Step 1: Convert to lowercase
+
         String step1 = new_id.toLowerCase();
-
-        // Step 2: Remove invalid characters
         String step2 = step1.replaceAll("[^a-z0-9-_.]","");
+        String step3 = step2.replaceAll("\\.+",".");
 
-        // Step 3: Replace consecutive dots with a single dot
-        String step3 = step2.replaceAll("\\.{2,}", ".");
-
-        // Step 4: Remove leading and trailing dots
-        String step4 = step3.replaceAll("^\\.|\\.$", "");
-
-        // Step 5: If empty, assign "a"
-        if (step4.isEmpty()) {
-            step4 = "a";
+        //step4
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i<step3.length(); i++){
+            char c = step3.charAt(i);
+            if (i == 0 && c == '.') {
+                continue; // Skip appending
+            }
+            if (i == step3.length() - 1 && c == '.') {
+                continue; // Skip appending
+            }
+            sb.append(c);
         }
 
-        // Step 6: Truncate to 15 characters and remove trailing dot
-        if (step4.length() >= 16) {
-            step4 = step4.substring(0, 15);
-            step4 = step4.replaceAll("\\.$", "");
+        //step5
+        String temp = sb.toString();
+        if(temp.isEmpty())
+            sb.append("a");
+
+        //step6
+        if(sb.length()>=16){
+            sb.delete(15, sb.length());
+            if(sb.charAt(sb.length()-1)=='.')
+                sb.delete(sb.length()-1,sb.length());
         }
 
-        // Step 7: Repeat last character until length is 3
-        if (step4.length() <= 2) {
-            char lastChar = step4.charAt(step4.length() - 1);
-            while (step4.length() < 3) {
-                step4 += lastChar;
+        //step7
+        if (sb.length() <= 2) {
+            char lastChar = sb.charAt(sb.length() - 1);
+            while(sb.length()!=3){
+                sb.append(lastChar);
             }
         }
-
-        return step4;
+        System.out.println("return");
+        return sb.toString();
     }
 }
