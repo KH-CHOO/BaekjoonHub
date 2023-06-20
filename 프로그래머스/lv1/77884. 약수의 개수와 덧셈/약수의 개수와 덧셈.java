@@ -1,7 +1,5 @@
 class Solution {
-    // 1 ≤ left ≤ right ≤ 1,000
     public int solution(int left, int right) {
-        boolean flag = true; // true for even
         int sum = 0;
         for(int i =left;i<=right;i++){
             int num = i;
