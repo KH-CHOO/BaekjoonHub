@@ -2,10 +2,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 class Solution {
     public int[] solution(int N, int[] stages) {
-
+        
         Map<Integer, Integer> stage_map_reached_user_count = new HashMap<>();
         Map<Integer, Integer> stage_map_not_cleared_user_count = new HashMap<>();
 
@@ -13,7 +12,7 @@ class Solution {
             stage_map_reached_user_count.put(i,0);
             stage_map_not_cleared_user_count.put(i,0);
         }
-
+        
         for(int i = 0; i<stages.length; i++){
             int stage = stages[i]; // user[i]'s current stage
             int not_cleared_user = stage_map_not_cleared_user_count.get(stage);
@@ -34,7 +33,6 @@ class Solution {
             }
             double failureRate = (double)value1 / value2;
             stage_failureRate.put(i,failureRate);
-            System.out.println(i+"스테이지 실패율: "+stage_failureRate.get(i));
         }
 
         List<Integer> sortedKeys = stage_failureRate.entrySet()
@@ -44,7 +42,6 @@ class Solution {
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
 
-        int[] result = sortedKeys.stream().mapToInt(Integer::intValue).toArray();
-        return result;
+        return sortedKeys.stream().mapToInt(Integer::intValue).toArray();
     }
 }
